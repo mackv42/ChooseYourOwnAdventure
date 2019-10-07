@@ -4,14 +4,16 @@ using ChooseYourOwnAdventure.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
-namespace ChooseYourOwnAdventure.Data.Migrations
+namespace ChooseYourOwnAdventure.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20191007223546_optionName")]
+    partial class optionName
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -24,6 +26,8 @@ namespace ChooseYourOwnAdventure.Data.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Name");
 
                     b.Property<string>("UserId");
 
@@ -40,17 +44,17 @@ namespace ChooseYourOwnAdventure.Data.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("Opt");
+                    b.Property<int?>("BelongsToId");
 
-                    b.Property<int>("OptResultId");
+                    b.Property<string>("Name");
 
-                    b.Property<int>("PageId");
+                    b.Property<int?>("RefersToId");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("OptResultId");
+                    b.HasIndex("BelongsToId");
 
-                    b.HasIndex("PageId");
+                    b.HasIndex("RefersToId");
 
                     b.ToTable("Options");
                 });
@@ -261,15 +265,13 @@ namespace ChooseYourOwnAdventure.Data.Migrations
 
             modelBuilder.Entity("ChooseYourOwnAdventure.Models.Option", b =>
                 {
-                    b.HasOne("ChooseYourOwnAdventure.Models.Page", "OptResult")
-                        .WithMany()
-                        .HasForeignKey("OptResultId")
-                        .OnDelete(DeleteBehavior.Cascade);
-
                     b.HasOne("ChooseYourOwnAdventure.Models.Page", "BelongsTo")
                         .WithMany()
-                        .HasForeignKey("PageId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .HasForeignKey("BelongsToId");
+
+                    b.HasOne("ChooseYourOwnAdventure.Models.Page", "RefersTo")
+                        .WithMany()
+                        .HasForeignKey("RefersToId");
                 });
 
             modelBuilder.Entity("ChooseYourOwnAdventure.Models.Page", b =>

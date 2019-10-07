@@ -40,3 +40,8 @@ C:\Users\Vincent\source\repos\ChooseYourOwnAdventure\ChooseYourOwnAdventure\obj\
 C:\Users\Vincent\source\repos\ChooseYourOwnAdventure\ChooseYourOwnAdventure\obj\Debug\netcoreapp2.2\Razor\Views\Stories\Details.g.cshtml.cs
 C:\Users\Vincent\source\repos\ChooseYourOwnAdventure\ChooseYourOwnAdventure\obj\Debug\netcoreapp2.2\Razor\Views\Stories\Edit.g.cshtml.cs
 C:\Users\Vincent\source\repos\ChooseYourOwnAdventure\ChooseYourOwnAdventure\obj\Debug\netcoreapp2.2\Razor\Views\Stories\Index.g.cshtml.cs
+C:\Users\Vincent\source\repos\ChooseYourOwnAdventure\ChooseYourOwnAdventure\obj\Debug\netcoreapp2.2\Razor\Views\Pages\Create.g.cshtml.cs
+C:\Users\Vincent\source\repos\ChooseYourOwnAdventure\ChooseYourOwnAdventure\obj\Debug\netcoreapp2.2\Razor\Views\Pages\Delete.g.cshtml.cs
+C:\Users\Vincent\source\repos\ChooseYourOwnAdventure\ChooseYourOwnAdventure\obj\Debug\netcoreapp2.2\Razor\Views\Pages\Details.g.cshtml.cs
+C:\Users\Vincent\source\repos\ChooseYourOwnAdventure\ChooseYourOwnAdventure\obj\Debug\netcoreapp2.2\Razor\Views\Pages\Edit.g.cshtml.cs
+C:\Users\Vincent\source\repos\ChooseYourOwnAdventure\ChooseYourOwnAdventure\obj\Debug\netcoreapp2.2\Razor\Views\Pages\Index.g.cshtml.cs

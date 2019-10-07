@@ -57,7 +57,7 @@ namespace ChooseYourOwnAdventure.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,UserId")] Account account)
+        public async Task<IActionResult> Create([Bind("Id,UserId,Name")] Account account)
         {
             if (ModelState.IsValid)
             {

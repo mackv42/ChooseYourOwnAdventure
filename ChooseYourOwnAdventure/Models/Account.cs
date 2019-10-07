@@ -15,6 +15,7 @@ namespace ChooseYourOwnAdventure.Models
 
         [ForeignKey(nameof(User))]
         public string UserId { get; set; }
+        public string Name { get; set; }
         public IdentityUser User { get; set; }
         public virtual List<Story> Stories { get; set; }
     }

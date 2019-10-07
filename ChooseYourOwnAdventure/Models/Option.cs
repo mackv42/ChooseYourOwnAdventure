@@ -11,13 +11,8 @@ namespace ChooseYourOwnAdventure.Models
     {
         [Key]
         public int Id { get; set; }
-        [ForeignKey(nameof(BelongsTo))]
-        public int PageId { get; set; }
+        public string Name { get; set; }
+        public Page RefersTo { get; set; }
         public Page BelongsTo { get; set; }
-
-        public string Opt { get; set; }
-        [ForeignKey(nameof(OptResult))]
-        public int OptResultId { get; set; }
-        public Page OptResult { get; set; }
     }
 }

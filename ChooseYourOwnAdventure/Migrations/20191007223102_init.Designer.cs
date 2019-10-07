@@ -7,11 +7,11 @@ using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
-namespace ChooseYourOwnAdventure.Data.Migrations
+namespace ChooseYourOwnAdventure.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20191007213133_baseStory")]
-    partial class baseStory
+    [Migration("20191007223102_init")]
+    partial class init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -26,6 +26,8 @@ namespace ChooseYourOwnAdventure.Data.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Name");
 
                     b.Property<string>("UserId");
 
@@ -42,17 +44,13 @@ namespace ChooseYourOwnAdventure.Data.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("Opt");
+                    b.Property<int>("PageReference");
 
-                    b.Property<int>("OptResultId");
-
-                    b.Property<int>("PageId");
+                    b.Property<int?>("RefersToId");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("OptResultId");
-
-                    b.HasIndex("PageId");
+                    b.HasIndex("RefersToId");
 
                     b.ToTable("Options");
                 });
@@ -263,15 +261,9 @@ namespace ChooseYourOwnAdventure.Data.Migrations
 
             modelBuilder.Entity("ChooseYourOwnAdventure.Models.Option", b =>
                 {
-                    b.HasOne("ChooseYourOwnAdventure.Models.Page", "OptResult")
-                        .WithMany()
-                        .HasForeignKey("OptResultId")
-                        .OnDelete(DeleteBehavior.Cascade);
-
-                    b.HasOne("ChooseYourOwnAdventure.Models.Page", "BelongsTo")
-                        .WithMany()
-                        .HasForeignKey("PageId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                    b.HasOne("ChooseYourOwnAdventure.Models.Page", "RefersTo")
+                        .WithMany("Options")
+                        .HasForeignKey("RefersToId");
                 });
 
             modelBuilder.Entity("ChooseYourOwnAdventure.Models.Page", b =>

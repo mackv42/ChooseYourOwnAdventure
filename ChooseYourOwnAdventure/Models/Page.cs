@@ -17,5 +17,7 @@ namespace ChooseYourOwnAdventure.Models
         public Story Story { get; set; }
        
         string Text { get; set; }
+
+        //public virtual Option FromOpt { get; set; }
     }
 }
