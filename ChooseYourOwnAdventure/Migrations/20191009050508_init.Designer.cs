@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ChooseYourOwnAdventure.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20191007223546_optionName")]
-    partial class optionName
+    [Migration("20191009050508_init")]
+    partial class init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {

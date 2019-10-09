@@ -218,12 +218,19 @@ namespace ChooseYourOwnAdventure.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    Name = table.Column<string>(nullable: true),
                     RefersToId = table.Column<int>(nullable: true),
-                    PageReference = table.Column<int>(nullable: false)
+                    BelongsToId = table.Column<int>(nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Options", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Options_Pages_BelongsToId",
+                        column: x => x.BelongsToId,
+                        principalTable: "Pages",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_Options_Pages_RefersToId",
                         column: x => x.RefersToId,
@@ -275,6 +282,11 @@ namespace ChooseYourOwnAdventure.Migrations
                 column: "NormalizedUserName",
                 unique: true,
                 filter: "[NormalizedUserName] IS NOT NULL");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Options_BelongsToId",
+                table: "Options",
+                column: "BelongsToId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Options_RefersToId",
