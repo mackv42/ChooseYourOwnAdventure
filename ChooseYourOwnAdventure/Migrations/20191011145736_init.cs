@@ -179,18 +179,25 @@ namespace ChooseYourOwnAdventure.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    UserId = table.Column<int>(nullable: false),
-                    Title = table.Column<string>(nullable: true)
+                    UserId = table.Column<string>(nullable: true),
+                    Title = table.Column<string>(nullable: true),
+                    AccountId = table.Column<int>(nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Stories", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Stories_Accounts_UserId",
-                        column: x => x.UserId,
+                        name: "FK_Stories_Accounts_AccountId",
+                        column: x => x.AccountId,
                         principalTable: "Accounts",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_Stories_AspNetUsers_UserId",
+                        column: x => x.UserId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -297,6 +304,11 @@ namespace ChooseYourOwnAdventure.Migrations
                 name: "IX_Pages_StoryId",
                 table: "Pages",
                 column: "StoryId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Stories_AccountId",
+                table: "Stories",
+                column: "AccountId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Stories_UserId",

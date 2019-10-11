@@ -7,14 +7,15 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using ChooseYourOwnAdventure.Data;
 using ChooseYourOwnAdventure.Models;
+using System.Security.Claims;
 
 namespace ChooseYourOwnAdventure.Controllers
 {
-    public class StoriesController : Controller
+    public class StoryController : Controller
     {
         private readonly ApplicationDbContext _context;
 
-        public StoriesController(ApplicationDbContext context)
+        public StoryController(ApplicationDbContext context)
         {
             _context = context;
         }
@@ -48,7 +49,7 @@ namespace ChooseYourOwnAdventure.Controllers
         // GET: Stories/Create
         public IActionResult Create()
         {
-            ViewData["UserId"] = new SelectList(_context.Accounts, "Id", "Id");
+            
             return View();
         }
 
@@ -57,15 +58,18 @@ namespace ChooseYourOwnAdventure.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,UserId,Title")] Story story)
+        public async Task<IActionResult> Create([Bind("Title")] Story story)
         {
+            Story addStory = new Story();
+            addStory.Title = story.Title;
+            addStory.UserId = User.FindFirstValue(ClaimTypes.NameIdentifier);
             if (ModelState.IsValid)
             {
-                _context.Add(story);
+                _context.Stories.Add(addStory);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["UserId"] = new SelectList(_context.Accounts, "Id", "Id", story.UserId);
+
             return View(story);
         }
 
@@ -82,7 +86,7 @@ namespace ChooseYourOwnAdventure.Controllers
             {
                 return NotFound();
             }
-            ViewData["UserId"] = new SelectList(_context.Accounts, "Id", "Id", story.UserId);
+           
             return View(story);
         }
 
@@ -91,7 +95,7 @@ namespace ChooseYourOwnAdventure.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,UserId,Title")] Story story)
+        public async Task<IActionResult> Edit(int id, [Bind("Title")] Story story)
         {
             if (id != story.Id)
             {
@@ -118,7 +122,7 @@ namespace ChooseYourOwnAdventure.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["UserId"] = new SelectList(_context.Accounts, "Id", "Id", story.UserId);
+
             return View(story);
         }
 

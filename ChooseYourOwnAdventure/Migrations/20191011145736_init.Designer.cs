@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ChooseYourOwnAdventure.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20191009050508_init")]
+    [Migration("20191011145736_init")]
     partial class init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -80,11 +80,15 @@ namespace ChooseYourOwnAdventure.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<int?>("AccountId");
+
                     b.Property<string>("Title");
 
-                    b.Property<int>("UserId");
+                    b.Property<string>("UserId");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("AccountId");
 
                     b.HasIndex("UserId");
 
@@ -284,10 +288,13 @@ namespace ChooseYourOwnAdventure.Migrations
 
             modelBuilder.Entity("ChooseYourOwnAdventure.Models.Story", b =>
                 {
-                    b.HasOne("ChooseYourOwnAdventure.Models.Account", "User")
+                    b.HasOne("ChooseYourOwnAdventure.Models.Account")
                         .WithMany("Stories")
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .HasForeignKey("AccountId");
+
+                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
